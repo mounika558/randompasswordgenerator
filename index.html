@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #displaypassword{
+            border: solid 5px black;
+            border-radius: 10px;
+            background-color:beige;
+            width:50%;
+            height:5rem;
+            margin:50px;
+            font-size: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        button{
+            border: solid 5px rgb(146, 34, 34);
+            border-radius: 10px;
+            background-color:rgb(31, 124, 195);
+            width:50%;
+            height:5rem; 
+            color: black;
+            margin:50px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+    <div id="displaypassword">
+
+    </div>
+    <button type="submit" id="generatepassword">Generate Password</button>
+
+    </main>
+    <script>
+        document.getElementById('generatepassword').addEventListener("click",()=>{
+            const length=8;
+            const includelowercase=true;
+            const includeuppercase=true;
+            const includenumber=true;
+            const includesymbols=true;
+            const password=generatepassword(length,includelowercase,includeuppercase,includenumber,includesymbols);
+            document.getElementById("displaypassword").innerHTML=password;
+        })
+        function generatepassword(length,includelowercase,includeuppercase,includenumber,includesymbols){
+        const lowercase="abcdefghijklmnopqrstuvwxyz";
+        const uppercase="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const number="0123456789";
+        const symbols="!@#$%^&*"
+        let allowedchars=" ";
+        let password=" ";
+
+        allowedchars+=includelowercase ?lowercase :" ";
+        allowedchars+=includeuppercase ?uppercase :" ";
+        allowedchars+=includenumber ?number :" ";
+        allowedchars+=includesymbols ?symbols :" ";
+        console.log(allowedchars);
+
+        if(length<=0){
+            alert("please enter your password atleast of 12 characters");
+        }
+        for(let i=0;i<length;i++){
+            const randomindex=Math.floor(Math.random()*allowedchars.length);
+            password+=allowedchars[randomindex];
+        }
+        return password;
+        }
+    </script>
+</body>
+</html>
